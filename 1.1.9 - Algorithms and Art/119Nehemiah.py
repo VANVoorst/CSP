@@ -8,16 +8,20 @@ def scale_shape(name, coords, scale):
 trtl.addshape("six", ((0,8), (-2,7.7), (-3,6.8), (-4,5), (-3.8,3), (-2,2.5), (-1,2.7), (0,3), (0,4), (-1.5,5), (-1,6), (0,7), (-2,4), (-1,4), (-1,3), (-1,3))) #6
 trtl.addshape("seven", ((0,7), (-4,7), (3.8,5), (-2,3), (-1,2), (0,2), (0,3), (-1,5), (0,5))) #7
 trtl.addshape("I", ((3,-2), (0,-2), (-3,-2), (0,-2), (0,7), (3,7), (0,7), (-3,7))) #i
+trtl.addshape("person", ((-3,-1), (0,2), (3,-1), (0,5), (-3,5), (3,5), (0,7), (1,7), (2,9), (0,11), (-2,9), (-1,7)))
+
 #coords
 six_coords = ((0,8), (-2,7.7), (-3,6.8), (-4,5), (-3.8,3), (-2,2.5), (-1,2.7), (0,3), (0,4), (-1.5,5), (-1,6), (0,7), (-2,4), (-1,4), (-1,3), (-1,3))
 seven_coords = ((0,7), (-4,7), (3.8,5), (-2,3), (-1,2), (0,2), (0,3), (-1,5), (0,5))
 I_coords = ((3,-2), (0,-2), (-3,-2), (0,-2), (0,7), (3,7), (0,7), (-3,7))
+person_coords = ((-3,-1), (0,2), (3,-1), (0,5), (-3,5), (3,5), (0,7), (1,7), (2,9), (0,11), (-2,9), (-1,7))
+
 #scale factors
 scale_factor = 2
 scale_shape("six", six_coords, scale_factor)
 scale_shape("seven", seven_coords, scale_factor)
 scale_shape("I", I_coords, scale_factor)
-
+scale_shape("person", person_coords, scale_factor)
 # ask user for colors
 turtle_colors = []
 while True:
@@ -30,7 +34,7 @@ while True:
 print("Your final list of colors:", turtle_colors)
 
 # color list
-turtle_shapes = ["six", "seven", "I", "six", "seven", "I"]
+turtle_shapes = ["six", "seven", "I", "person", "seven", "I"]
 my_turtles = []
 
 # trtl colors and shape 
