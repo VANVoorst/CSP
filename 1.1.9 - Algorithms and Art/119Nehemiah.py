@@ -18,31 +18,44 @@ scale_shape("six", six_coords, scale_factor)
 scale_shape("seven", seven_coords, scale_factor)
 scale_shape("I", I_coords, scale_factor)
 
+# ask user for colors
+turtle_colors = []
+while True:
+    color_input = input("Enter a color 6 is the max number (or type 'done' to finish): ")
+    if color_input.lower() == 'done':
+        break
+    else:
+        turtle_colors.append(color_input)
 
+print("Your final list of colors:", turtle_colors)
 
-#color list
+# color list
 turtle_shapes = ["six", "seven", "I", "six", "seven", "I"]
-turtle_colors = ["red", "blue", "green", "orange", "purple", "gold"]
 my_turtles = []
 
-#trtl colors and shape 
+# trtl colors and shape 
 for s in turtle_shapes:
-  t = trtl.Turtle(shape=s)
-  t.penup()
-  my_turtles.append(t)
+    t = trtl.Turtle(shape=s)
+    if turtle_colors:
+        color = turtle_colors.pop(0)  
+    else:
+        color = "black" 
+    t.color(color)
+    t.penup()
+    my_turtles.append(t)
 
-#start postion 1
+# start position
 startx = 0
 starty = 0
 
-#trtl movemnet
+# trtl movement
 for t in my_turtles:
-  t.goto(startx, starty)
-  t.pendown()
-  t.right(180)     
-  t.forward(50)
-  startx = startx + 50
-  starty = starty + 50
+    t.goto(startx, starty)
+    t.pendown()
+    t.right(180)     
+    t.forward(50)
+    startx = startx + 50
+    starty = starty + 50
 
 wn = trtl.Screen()
 wn.mainloop()
