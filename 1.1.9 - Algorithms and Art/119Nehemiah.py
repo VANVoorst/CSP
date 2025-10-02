@@ -17,7 +17,7 @@ I_coords = ((3,-2), (0,-2), (-3,-2), (0,-2), (0,7), (3,7), (0,7), (-3,7))
 person_coords = ((-3,-1), (0,2), (3,-1), (0,5), (-3,5), (3,5), (0,7), (1,7), (2,9), (0,11), (-2,9), (-1,7))
 
 #scale factors
-scale_factor = 2
+scale_factor = float(input("Enter a scale factor for the shapes example 2 or 5: "))
 scale_shape("six", six_coords, scale_factor)
 scale_shape("seven", seven_coords, scale_factor)
 scale_shape("I", I_coords, scale_factor)
@@ -33,17 +33,17 @@ while True:
 
 print("Your final list of colors:", turtle_colors)
 
-# color list
-turtle_shapes = ["six", "seven", "I", "person", "seven", "I"]
+#lists
+turtle_shapes = ["six", "seven", "I", "person", "six", "seven"]
 my_turtles = []
 
 # trtl colors and shape 
-for s in turtle_shapes:
+for i, s in enumerate(turtle_shapes):
     t = trtl.Turtle(shape=s)
-    if turtle_colors:
-        color = turtle_colors.pop(0)  
+    if turtle_colors:  
+        color = turtle_colors[i % len(turtle_colors)]
     else:
-        color = "black" 
+        color = "black"
     t.color(color)
     t.penup()
     my_turtles.append(t)
