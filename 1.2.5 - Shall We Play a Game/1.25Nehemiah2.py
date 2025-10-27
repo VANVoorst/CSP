@@ -38,25 +38,17 @@ def reset_apple(active_bird):
 
 def draw_apple(active_apple):
   active_apple.shape(bird_image)
-  draw_letter("A", active_apple)
   wn.update()
 
 #apple to fall or move
 def drop_apple():
-  wn.tracer(True)
-  apple.goto(apple.xcor(), -200)
-  apple.clear()
-  apple.hideturtle()
-  wn.tracer(False)
+    new_x = rand.randint(-230, 230)
+    new_y = rand.randint(-180, 180)
+    bird_image.goto(new_x, new_y)
 
 
 
-def draw_letter(letter, active_apple):
-  active_apple.color("white")
-  remember_postion = active_apple.position()
-  active_apple.setpos(active_apple.xcor()-25, active_apple.ycor()-50)
-  active_apple.write(letter, font=("Arial", 74, "bold"))
-  active_apple.setpos(remember_postion)
+
 
 
 
@@ -64,7 +56,7 @@ def draw_letter(letter, active_apple):
 draw_apple(apple)
 
 
-wn.onkeypress(drop_apple, "a")
+wn.onclick()
 
 wn.listen()
 
