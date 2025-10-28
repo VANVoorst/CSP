@@ -1,64 +1,68 @@
-#   a123_apple_1.py
 import turtle as trtl
 import random as rand
 
 #-----setup-----
-bird_image = "bird2.gif" # Store the file name of your shape
-#pear_image = "pear.gif"
-
-
+bird_image = "bird3.gif"
+timer = 12
+counting_down = True
+#screen setup
 wn = trtl.Screen()
-wn.setup(width=.7, height=.7)
-wn.addshape(bird_image) # Make the screen aware of the new file
+wn.setup(width=0.68, height=0.75)
+wn.addshape(bird_image)
+wn.bgpic("background.gif")
 
-#wn.addshape(pear_image)
-
-letter_list = ["A", "B", "C", "D","E"]
-current_letter = "A"
-
-
-drawer = trtl.Turtle()
-drawer.hideturtle()
-drawer.penup
-apple = trtl.Turtle()
-apple.penup()
-apple.speed(1)
+bird = trtl.Turtle()
+bird.penup()
+bird.speed(1)
+bird.shape(bird_image)
 wn.tracer(False)
 
+# Timer writer
+timer_writer = trtl.Turtle()
+timer_writer.hideturtle()
+timer_writer.penup()
+timer_writer.goto(360, 280)
+
 #-----functions-----
-# given a turtle, set that turtle to be shaped by the image file
-def reset_apple(active_bird):
-  global current_letter
-  lenght_of_list= len(letter_list)
-  if (lenght_of_list != 0 ):
-    index = rand.randint(0, lenght_of_list)
-    active_bird.goto(rand.randint(-200,200), 200)
-    current_letter = letter_list.pop(index)
+#makes the bird move
+def reset_bird(active_bird):
+    if counting_down:
+        x = rand.randint(-250, 250)
+        y = rand.randint(-50, 150)
+        active_bird.goto(x, y)
+    wn.update()
+#shows the bird on the screen
+def draw_bird(active_bird):
+    active_bird.shape(bird_image)
+    wn.update()
+#lets you click on the bird
+def shoot_bird(x, y):
+    bird.hideturtle()
+    wn.update()
+    wn.ontimer(lambda: respawn_bird(bird), 800)
+#respawns the bird
+def respawn_bird(active_bird):
+    reset_bird(active_bird)
+    active_bird.showturtle()
+    draw_bird(active_bird)
+#timer
+def countdown():
+    global timer, counting_down
+    timer_writer.clear()
 
-
-def draw_apple(active_apple):
-  active_apple.shape(bird_image)
-  wn.update()
-
-#apple to fall or move
-def drop_apple():
-    new_x = rand.randint(-230, 230)
-    new_y = rand.randint(-180, 180)
-    bird_image.goto(new_x, new_y)
-
-
-
-
-
-
+    if timer <= 0:
+        timer_writer.write("Game Over!", font=("Arial", 20, "bold"))
+        counting_down = False
+    else:
+        timer_writer.write("Time: " + str(timer), font=("Arial", 18, "bold"))
+        timer -= 1
+        wn.ontimer(countdown, 1000)  
 
 #-----function calls-----
-draw_apple(apple)
-
-
-wn.onclick()
+reset_bird(bird)
+draw_bird(bird)
+bird.onclick(shoot_bird)
+countdown() 
 
 wn.listen()
-
-wn.bgpic("background.gif")
 wn.mainloop()
