@@ -5,12 +5,16 @@ import turtle as trtl
 import random as rand
 import leaderboard as lb
 
-#-----setup-----
+
+leaderboard_file_name = "a125_leaderboard.txt"
+leader_names_list = lb.get_names(leaderboard_file_name)
+leader_scores_list = lb.get_scores(leaderboard_file_name)
+#setup
 bird_image = "bird3.gif"
 timer = 12
 counting_down = True
 score = 0
-bird_speed = 1   # speed increases
+bird_speed = 1   
 
 max_chars = 7
 font_setup = ("Arial", 20, "normal")
@@ -55,7 +59,12 @@ leader_writer.hideturtle()
 leader_writer.penup()
 leader_writer.goto(-150, 200)
 
-#-----functions-----
+# leaderboard display turtle
+leader_turtle = trtl.Turtle()
+leader_turtle.hideturtle()
+leader_turtle.penup()
+
+#functions
 def reset_bird(active_bird):
     if counting_down:
         x = rand.randint(-250, 250)
@@ -69,8 +78,6 @@ def respawn_bird(active_bird):
 
 def shoot_bird(x, y):
     global score, bird_speed, counting_down
-
-    # ❗ Stop clicks after game ends
     if not counting_down:
         return
 
@@ -89,24 +96,34 @@ def shoot_bird(x, y):
 
 def countdown():
     global timer, counting_down
+
     timer_writer.clear()
 
     if timer <= 0:
-        timer_writer.write("Game Over!", font= font_setup)
+        timer_writer.write("Game Over!", font=font_setup)
         counting_down = False
-        bird.hideturtle()   # <--- hides the bird
-        wn.update()
+        bird.hideturtle()
+
+        # Update leaderboard with player's score
+        lb.update_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list, player_name, score)
+        new_names = lb.get_names(leaderboard_file_name)
+        new_scores = lb.get_scores(leaderboard_file_name)
+        leader_turtle.clear()
+        lb.draw_leaderboard(player_name in new_names, new_names, new_scores, leader_turtle, score)
+
+        return 
 
     else:
         timer_writer.write("Time: " + str(timer), font=font_setup)
         timer -= 1
         wn.ontimer(countdown, 1000)
 
+
 def end_game():
     global counting_down
     counting_down = False
 
-    bird.hideturtle()  # <--- remove the bird
+    bird.hideturtle()
 
     timer_writer.clear()
     score_writer.clear()
@@ -120,7 +137,7 @@ def end_game():
 
 def show_leaderboard():
     leader_writer.clear()
-    leader_writer.write("🏆 LEADERBOARD 🏆", font=("Arial", 24, "bold"))
+    leader_writer.write("LEADERBOARD", font=font_setup)
 
     y_pos = 150
     for i in range(len(leader_names_list)):
@@ -129,7 +146,7 @@ def show_leaderboard():
                             font=font_setup)
         y_pos -= 35
 
-#-----start game-----
+#start game
 leader_names_list = lb.get_names(leaderboard_file_name)
 leader_scores_list = lb.get_scores(leaderboard_file_name)
 
