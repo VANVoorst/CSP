@@ -26,28 +26,14 @@ def get_names(file_name):
   
 # return scores from the leaderboard file
 def get_scores(file_name):
-    leaderboard_file = open(file_name, "r")  # be sure you have created this
-
     scores = []
-    for line in leaderboard_file:
-      leader_score = ""    
-      index = 0
-
-      # TODO 3: use a while loop to index beyond the comma, skipping the player's name
-      while (line[index] != ","): 
-       index +=1
-      index +=1 # goes to 1 index PAST the comma 
-      # TODO 4: use a while loop to get the score
-      while (line[index] != "\n"):
-        leader_score = leader_score + line[index]
-        index += 1
-      #print(leader_score)
-      # TODO 5: add the player score to the scores list
-      scores.append(int(leader_score))
-    print(scores)
-    leaderboard_file.close()
-
-    # TODO 7: return the scores in place of the empty list
+    with open(file_name, "r") as leaderboard_file:
+        for line in leaderboard_file:
+            line = line.strip()
+            if not line or "," not in line:
+                continue
+            leader_score = int(line.split(",")[1])
+            scores.append(leader_score)
     return scores
 
 
@@ -119,7 +105,3 @@ def draw_leaderboard(high_scorer, leader_names, leader_scores, turtle_object, pl
     turtle_object.goto(-160,int(turtle_object.ycor())-50)
     turtle_object.pendown()
     
-
-
-get_scores("a125_leaderboard.txt")
-get_names("a125_leaderboard.txt")
