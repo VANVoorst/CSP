@@ -59,8 +59,8 @@ writer = trtl.Turtle()
 writer.hideturtle()
 writer.penup()
 
-Lane_Drawer = trtl.Turtle()
-Lane_Drawer.hideturtle()
+bird_Drawer = trtl.Turtle()
+bird_Drawer.hideturtle()
 
 # moves the bird to a new random position
 def reset_bird(active_bird):
@@ -126,7 +126,7 @@ def start_game(x=None, y=None):
     global counting_down, timer, score, bird_speed, player_name
     wn.onclick(None)
     writer.clear()
-    Lane_Drawer.clear()
+    bird_Drawer.clear()
     player_name = trtl.textinput("Name", "enter your name (max " + str(max_chars)+ " chars):")
     player_name = player_name[:max_chars]
     while "," in player_name:
@@ -146,7 +146,7 @@ def start_game(x=None, y=None):
 def show_instruction_screen(x=None, y=None):
     wn.onclick(None)
     writer.clear()
-    Lane_Drawer.clear()
+    bird_Drawer.clear()
     writer.goto(0, 50)
     writer.write("Shoot the dove to earn points.", align="center", font=("Arial", 22, "normal"))
     writer.goto(0, -20)
@@ -156,7 +156,7 @@ def show_instruction_screen(x=None, y=None):
 # start screen title
 def show_start_screen():
     writer.clear()
-    Lane_Drawer.clear()
+    bird_Drawer.clear()
     writer.goto(0, 50)
     writer.write("Dove Hunt", align="center", font=("Arial", 28, "bold"))
     writer.goto(0, -20)
