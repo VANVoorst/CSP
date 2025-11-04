@@ -78,7 +78,7 @@ def draw_leaderboard(high_scorer, leader_names, leader_scores, turtle_object, pl
     font_setup = ("Arial", 20, "normal")
     turtle_object.clear()
     turtle_object.penup()
-    turtle_object.goto(-160,100)
+    turtle_object.goto(-160,200)
     turtle_object.hideturtle()
     turtle_object.down()
 
