@@ -42,7 +42,7 @@ timer_writer.goto(360, 280)
 score_writer = trtl.Turtle()
 score_writer.hideturtle()
 score_writer.penup()
-score_writer.goto(220, 170)
+score_writer.goto(420, 250)
 score_writer.write(score, font=font_setup)
 
 # leaderboard display turtles
@@ -97,6 +97,8 @@ def countdown():
         counting_down = False
         bird.hideturtle()
         bird.onclick(None)
+        wn.update()
+
         lb.update_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list, player_name, score)
         new_names = lb.get_names(leaderboard_file_name)
         new_scores = lb.get_scores(leaderboard_file_name)

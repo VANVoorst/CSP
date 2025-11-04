@@ -1,5 +1,5 @@
 six,24
 seven,23
+bo,22
+Billybo,22
 Jimmoth,22
-Judaism,22
-jim,21
